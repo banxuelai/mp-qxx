@@ -2,6 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/list/list",
+    "pages/grid/grid",
+    "pages/gridDetail/gridDetail",
     "pages/detail/detail",
     "pages/messages/messages",
     "pages/profile/profile",
@@ -10,7 +12,7 @@
   "window": {
     "navigationBarBackgroundColor": "#3a4861",
     "navigationBarTextStyle": "white",
-    "navigationBarTitleText": "本地生活",
+    "navigationBarTitleText": "启新熊",
     "backgroundColor": "#bcc0c9",
     "backgroundTextStyle": "light",
     "enablePullDownRefresh": false,

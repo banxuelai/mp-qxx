@@ -1,5 +1,5 @@
 const fetch = require('../../utils/fetch')
-
+const fetchQxx = require('../../utils/fetchQxx')
 Page({
   /**
    * 页面的初始数据

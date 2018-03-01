@@ -1,26 +1,22 @@
-const fetch = require('../../utils/fetch')
-const fetchQxx = require('../../utils/fetchQxx')
+const fetch = require('../../utils/fetch');
+const fetchQxx = require('../../utils/fetchQxx');
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    slides: [],
-    categories: []
+    cars: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad (options) {
-    fetchQxx('/slides')
-      .then(res => {
-        this.setData({ slides: res.data })
-      })
 
-    fetch('/categories')
+
+    fetchQxx('/car-types')
       .then(res => {
-        this.setData({ categories: res.data })
+        this.setData({ cars: res.data })
       })
 
     // const slides = [
