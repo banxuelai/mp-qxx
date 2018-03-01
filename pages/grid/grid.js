@@ -1,41 +1,74 @@
 const fetch = require('../../utils/fetch');
 const fetchQxx = require('../../utils/fetchQxx');
 Page({
-  /**
-   * 页面的初始数据
-   */
-  data: {
-    cars: []
-  },
+    /**
+     * 页面的初始数据
+     */
+    data: {
+        category: null,
+        cars: [],
+        pageIndex: 0,
+        pageSize: 20,
+        totalCount: 0,
+        hasMore: true
+    },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad (options) {
+    loadMore() {
+        let {pageIndex, pageSize, searchText} = this.data;
+        const params = {page: pageIndex++, size: pageSize};
+        if (searchText) params.q = searchText;
 
+        return fetchQxx(`/car-types`, params)
+            .then(res => {
+                const totalCount = parseInt(res.header['X-Total-Count']);
+                const hasMore = this.data.pageIndex * this.data.pageSize < totalCount;
+                let cars = this.data.cars;
+                if (hasMore) {
+                    cars = this.data.cars.concat(res.data);
+                }
+                this.setData({cars, totalCount, pageIndex, hasMore})
+            })
+    },
 
-    fetchQxx('/car-types')
-      .then(res => {
-        this.setData({ cars: res.data })
-      })
+    /**
+     * 生命周期函数--监听页面加载
+     */
+    onLoad(options) {
+        this.loadMore()
+    },
 
-    // const slides = [
-    //   { image: 'http://ww1.sinaimg.cn/mw690/006ThXL5ly1fj7zx3w751j30u00dmgy3.jpg', link: '' },
-    //   { image: 'http://ww1.sinaimg.cn/mw690/006ThXL5ly1fj6ckx9tlwj30u00fqk8n.jpg', link: '/pages/list/list?cat=10' }
-    // ]
+    /**
+     * 页面相关事件处理函数--监听用户下拉动作
+     */
+    onPullDownRefresh() {
+        this.setData({cars: [], pageIndex: 0, hasMore: true});
+        this.loadMore().then(() => wx.stopPullDownRefresh())
+    },
 
-    // const categories = [
-    //   { icon: '/assets/icons/grid-01.png', text: '美食', category_id: 1 },
-    //   { icon: '/assets/icons/grid-02.png', text: '洗浴足疗', category_id: 2 },
-    //   { icon: '/assets/icons/grid-03.png', text: '结婚啦', category_id: 3 },
-    //   { icon: '/assets/icons/grid-04.png', text: '卡拉OK', category_id: 4 },
-    //   { icon: '/assets/icons/grid-05.png', text: '找工作', category_id: 5 },
-    //   { icon: '/assets/icons/grid-06.png', text: '辅导班', category_id: 6 },
-    //   { icon: '/assets/icons/grid-07.png', text: '汽车保养', category_id: 7 },
-    //   { icon: '/assets/icons/grid-08.png', text: '租房', category_id: 8 },
-    //   { icon: '/assets/icons/grid-09.png', text: '装修', category_id: 9 }
-    // ]
+    /**
+     * 页面上拉触底事件的处理函数
+     */
+    onReachBottom() {
+        // TODO：节流
+        this.loadMore()
+    },
 
-    // this.setData({ slides, categories })
-  }
-})
+    searchHandle() {
+        // console.log(this.data.searchText)
+        this.setData({cars: [], pageIndex: 0, hasMore: true});
+        this.loadMore()
+    },
+
+    showSearchHandle() {
+        this.setData({searchShowed: true})
+    },
+    hideSearchHandle() {
+        this.setData({searchText: '', searchShowed: false})
+    },
+    clearSearchHandle() {
+        this.setData({searchText: ''})
+    },
+    searchChangeHandle(e) {
+        this.setData({searchText: e.detail.value})
+    }
+});
