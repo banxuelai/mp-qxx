@@ -1,5 +1,5 @@
-const fetch = require('../../utils/fetch')
-const fetchQxx = require('../../utils/fetchQxx')
+const fetch = require('../../utils/fetch');
+const fetchQxx = require('../../utils/fetchQxx');
 Page({
   /**
    * 页面的初始数据
@@ -14,15 +14,15 @@ Page({
   },
 
   loadMore () {
-    let { pageIndex, pageSize, searchText } = this.data
-    const params = { _page: ++pageIndex, _limit: pageSize }
-    if (searchText) params.q = searchText
+    let { pageIndex, pageSize, searchText } = this.data;
+    const params = { _page: ++pageIndex, _limit: pageSize };
+    if (searchText) params.q = searchText;
 
     return fetch(`/categories/${this.data.category.id}/shops`, params)
       .then(res => {
-        const totalCount = parseInt(res.header['X-Total-Count'])
-        const hasMore = this.data.pageIndex * this.data.pageSize < totalCount
-        const shops = this.data.shops.concat(res.data)
+        const totalCount = parseInt(res.header['X-Total-Count']);
+        const hasMore = this.data.pageIndex * this.data.pageSize < totalCount;
+        const shops = this.data.shops.concat(res.data);
         this.setData({ shops, totalCount, pageIndex, hasMore })
       })
   },
@@ -33,8 +33,8 @@ Page({
   onLoad (options) {
     fetch(`/categories/${options.cat}`)
       .then(res => {
-        this.setData({ category: res.data })
-        wx.setNavigationBarTitle({ title: res.data.name })
+        this.setData({ category: res.data });
+        wx.setNavigationBarTitle({ title: res.data.name });
 
         this.loadMore()
       })
@@ -44,7 +44,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh () {
-    this.setData({ shops: [], pageIndex: 0, hasMore: true })
+    this.setData({ shops: [], pageIndex: 0, hasMore: true });
     this.loadMore().then(() => wx.stopPullDownRefresh())
   },
 
@@ -58,7 +58,7 @@ Page({
 
   searchHandle () {
     // console.log(this.data.searchText)
-    this.setData({ shops: [], pageIndex: 0, hasMore: true })
+    this.setData({ shops: [], pageIndex: 0, hasMore: true });
     this.loadMore()
   },
 
@@ -74,4 +74,4 @@ Page({
   searchChangeHandle (e) {
     this.setData({ searchText: e.detail.value })
   }
-})
+});

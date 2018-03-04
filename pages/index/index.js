@@ -18,7 +18,7 @@ Page({
         this.setData({ slides: res.data })
       })
 
-    fetch('/categories')
+    fetchQxx('/categories')
       .then(res => {
         this.setData({ categories: res.data })
       })

@@ -1,5 +1,5 @@
 <view class="avatar">
-  <image src="/assets/avatar.png" bindtap="loginHandle"></image>
+  <image src="{{userInfo.avatarUrl}}" bindtap="loginHandle"></image>
 </view>
 
 <view class="cells">

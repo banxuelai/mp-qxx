@@ -4,7 +4,10 @@
     "pages/list/list",
     "pages/grid/grid",
     "pages/gridDetail/gridDetail",
+    "pages/localList/localList",
+    "pages/localDetail/localDetail",
     "pages/detail/detail",
+    "pages/operation/operation",
     "pages/messages/messages",
     "pages/profile/profile",
     "pages/settings/settings"

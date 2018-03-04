@@ -5,6 +5,7 @@ Page({
      * 页面的初始数据
      */
     data: {
+        apiUrl: "",
         category: null,
         cars: [],
         pageIndex: 0,
@@ -16,9 +17,9 @@ Page({
     loadMore() {
         let {pageIndex, pageSize, searchText} = this.data;
         const params = {page: pageIndex++, size: pageSize};
-        if (searchText) params.q = searchText;
+        if (searchText) params['name.contains'] = searchText;
 
-        return fetchQxx(`/car-types`, params)
+        return fetchQxx(this.data.apiUrl, params)
             .then(res => {
                 const totalCount = parseInt(res.header['X-Total-Count']);
                 const hasMore = this.data.pageIndex * this.data.pageSize < totalCount;
@@ -34,6 +35,12 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
+        if (options.title) {
+            wx.setNavigationBarTitle({title: options.title});
+        }
+        if (options.apiUrl) {
+            this.setData("apiUrl", `/animals`)
+        }
         this.loadMore()
     },
 

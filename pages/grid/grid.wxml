@@ -1,3 +1,4 @@
+<include src="/includes/search-bar.wxml"/>
 <view class="grids">
   <navigator class="item" wx:for="{{cars}}" wx:key="id"
              url="/pages/gridDetail/gridDetail?id={{item.id}}&name={{item.name}}&sinaUrl={{item.sinaUrl}}">
