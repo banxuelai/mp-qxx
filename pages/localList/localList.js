@@ -20,8 +20,9 @@ Page({
 
         try {
             let value = wx.getStorageSync('wordGroupKey');
-            if (!value) {
-                value = [];
+            if (!value || value.length === 0) {
+                value = [{content: '我是生字学习的模板'}];
+                wx.setStorageSync('wordGroupKey', value);
             }
             this.setData({list: value});
         } catch (e) {

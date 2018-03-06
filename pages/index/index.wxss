@@ -1,5 +1,5 @@
 .slides {
-  height: 380rpx;
+  height: 580rpx;
 }
 
 .slides navigator,

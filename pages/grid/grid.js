@@ -39,7 +39,7 @@ Page({
             wx.setNavigationBarTitle({title: options.title});
         }
         if (options.apiUrl) {
-            this.setData("apiUrl", `/animals`)
+            this.setData({"apiUrl": options.apiUrl})
         }
         this.loadMore()
     },
