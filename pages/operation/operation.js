@@ -19,7 +19,7 @@ Page({
             stuId: options.id,
         });
         if (options.id == undefined) {
-            return;
+
         }
         // wx.request({
         //   url: "http://127.0.0.1:8080/demo/superadmin/getStudentById",

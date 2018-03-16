@@ -10,7 +10,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad (options) {
-    const messages = this.data.messages
+    const messages = this.data.messages;
     for (var i = 0; i < 18; i++) {
       messages.push({
         title: '免费送票！超有内涵的门票。',
@@ -27,8 +27,8 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady () {
-    const query = wx.createSelectorQuery()
-    query.select('#bottom').boundingClientRect()
+    const query = wx.createSelectorQuery();
+    query.select('#bottom').boundingClientRect();
     query.exec(res => wx.pageScrollTo({ scrollTop: res[0].top + 200 }))
   },
 
@@ -73,4 +73,4 @@ Page({
   onShareAppMessage () {
 
   }
-})
+});

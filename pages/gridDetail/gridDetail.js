@@ -1,4 +1,4 @@
-const fetch = require('../../utils/fetch')
+const fetch = require('../../utils/fetch');
 
 Page({
   /**
@@ -21,4 +21,4 @@ Page({
       urls: this.data.shop.sinaUrl
     })
   }
-})
+});

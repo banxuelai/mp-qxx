@@ -1,4 +1,4 @@
-const fetch = require('../../utils/fetch')
+const fetch = require('../../utils/fetch');
 
 Page({
   /**
@@ -14,7 +14,7 @@ Page({
   onLoad (options) {
     fetch(`/shops/${options.item}`)
       .then(res => {
-        this.setData({ shop: res.data })
+        this.setData({ shop: res.data });
         wx.setNavigationBarTitle({ title: res.data.name })
       })
   },
@@ -25,4 +25,4 @@ Page({
       urls: this.data.shop.images
     })
   }
-})
+});
