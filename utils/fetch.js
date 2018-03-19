@@ -9,7 +9,12 @@ module.exports = (url, data, method = 'GET', header = {}) => {
             header,
             method,
             dataType: 'json',
-            success: resolve,
+            success: function (data, statusCode, header) {
+                console.log(data);
+                console.log(statusCode);
+                console.log(header);
+                resolve(data)
+            },
             fail: reject,
             complete: wx.hideLoading
         })

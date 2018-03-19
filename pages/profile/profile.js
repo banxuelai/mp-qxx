@@ -1,3 +1,4 @@
+const fetch = require('../../utils/fetchQxx');
 Page({
     /**
      * 页面的初始数据
@@ -10,8 +11,11 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
-        let storageSync = wx.getStorageSync("loginInfo");
-        this.setData({userInfo: storageSync['userInfo']})
+
+        fetch("/account").then(value => {
+            this.setData({userInfo: value.data});
+        })
+
 
     },
 
