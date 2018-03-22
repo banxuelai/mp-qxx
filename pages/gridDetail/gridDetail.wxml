@@ -7,7 +7,8 @@
 <button type="primary" bindtap="audioPlay">播放</button>
 
 <view class='desctription' wx:if="{{gridData.desctription}}">
-  <text>{{gridData.desctription}}</text>
+  <text>{{gridData.desctription}} </text>
+  
 </view>
 
 
