@@ -8,7 +8,6 @@
 
 <view class='desctription' wx:if="{{gridData.desctription}}">
   <text>{{gridData.desctription}} </text>
-  
 </view>
 
 
