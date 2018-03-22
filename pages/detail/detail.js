@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    shop: {}
+    gridData: {}
   },
 
   /**
@@ -22,7 +22,7 @@ Page({
   previewHandle (e) {
     wx.previewImage({
       current: e.target.dataset.src,
-      urls: this.data.shop.images
+      urls: this.data.gridData.images
     })
   }
 });

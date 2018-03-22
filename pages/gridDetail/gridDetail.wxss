@@ -5,3 +5,6 @@ image {
 page {
     background-color: #fff;
 }
+.desctription{
+  padding: 5px
+}

@@ -12,6 +12,8 @@ App({
         timeOut: "连接超时"
     }
     , onLaunch: function () {
+      console.log("onLaunch->removeStorageSync->jhpsterHeader");
+      wx.removeStorageSync(this.config.jhpsterHeader);
 
     }
 });

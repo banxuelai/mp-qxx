@@ -1,6 +1,14 @@
-<image src="{{shop.sinaUrl}}" mode='aspectFit'/>
+<image src="{{gridData.sinaUrl}}" mode='aspectFit'/>
 <view style="text-align:center;font-size: 60rpx;font-weight: bold">
-    {{shop.name}}
+    {{gridData.name}}
 </view>
+<audio  src="{{src}}" id="myAudio" ></audio>
+
+<button type="primary" bindtap="audioPlay">播放</button>
+
+<view class='desctription' wx:if="{{gridData.desctription}}">
+  <text>{{gridData.desctription}}</text>
+</view>
+
 
 

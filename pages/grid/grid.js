@@ -1,4 +1,3 @@
-const fetch = require('../../utils/fetch');
 const fetchQxx = require('../../utils/fetchQxx');
 Page({
     /**
@@ -6,8 +5,7 @@ Page({
      */
     data: {
         apiUrl: "",
-        category: null,
-        cars: [],
+        pageData: [],
         pageIndex: 0,
         pageSize: 20,
         totalCount: 0,
@@ -23,11 +21,14 @@ Page({
             .then(res => {
                 const totalCount = parseInt(res.header['X-Total-Count']);
                 const hasMore = this.data.pageIndex * this.data.pageSize < totalCount;
-                let cars = this.data.cars;
+                let pageData = this.data.pageData;
                 if (hasMore) {
-                    cars = this.data.cars.concat(res.data);
+                    pageData = this.data.pageData.concat(res.data);
                 }
-                this.setData({cars, totalCount, pageIndex, hasMore})
+                for (let data of pageData) {
+                    data["json"] = JSON.stringify(data)
+                }
+                this.setData({pageData, totalCount, pageIndex, hasMore})
             })
     },
 
@@ -48,7 +49,7 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh() {
-        this.setData({cars: [], pageIndex: 0, hasMore: true});
+        this.setData({pageData: [], pageIndex: 0, hasMore: true});
         this.loadMore().then(() => wx.stopPullDownRefresh())
     },
 
@@ -62,7 +63,7 @@ Page({
 
     searchHandle() {
         // console.log(this.data.searchText)
-        this.setData({cars: [], pageIndex: 0, hasMore: true});
+        this.setData({pageData: [], pageIndex: 0, hasMore: true});
         this.loadMore()
     },
 
