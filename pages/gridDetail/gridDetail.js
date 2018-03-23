@@ -6,32 +6,34 @@ Page({
      */
     data: {
         audioURL: "/audio",
-        gridData: {},
+            gridData: [],
         innerAudioContext: null
     },
-
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
         let gridData = JSON.parse(options.data);
         let that = this;
-        this.setData({gridData: JSON.parse(options.data)});
+        let data = [gridData, gridData, gridData];
+		that.setData({
+            gridData: data
+        });
+		console.log(that.data.gridData);
         fetchQxx(this.data.audioURL + "/" + gridData['audioId']).then(res => {
             const innerAudioContext = wx.createInnerAudioContext();
             innerAudioContext.autoplay = true;
             innerAudioContext.src = res.data.url;
-            console.log(res.data.url);
+            // console.log(res.data.url);
             innerAudioContext.onPlay(() => {
-                console.log('开始播放')
+                // console.log('开始播放')
             });
             innerAudioContext.onError((res) => {
-                console.log(res.errMsg);
-                console.log(res.errCode)
+                // console.log(res.errMsg);
+                // console.log(res.errCode)
             });
             that.setData({innerAudioContext: innerAudioContext});
         });
-
 
     },
     onUnload: function () {
