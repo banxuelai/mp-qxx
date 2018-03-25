@@ -1,11 +1,15 @@
 const fetchQxx = require('../../utils/fetchQxx');
+const fetchStorage = require('../../utils/fetchStorage');
+const app = getApp();
 Page({
     /**
      * 页面的初始数据
      */
     data: {
         apiUrl: "",
+        title: "",
         pageData: [],
+        pageDataJson: "[]",
         pageIndex: 0,
         pageSize: 20,
         totalCount: 0,
@@ -28,7 +32,8 @@ Page({
                 for (let data of pageData) {
                     data["json"] = JSON.stringify(data)
                 }
-                this.setData({pageData, totalCount, pageIndex, hasMore})
+                let pageDataJson = JSON.stringify(pageData);
+                this.setData({pageData, totalCount, pageIndex, hasMore, pageDataJson})
             })
     },
 
@@ -36,9 +41,9 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
-        if (options.title) {
-            wx.setNavigationBarTitle({title: options.title});
-        }
+        let title = options.title;
+        wx.setNavigationBarTitle({title: title});
+        this.setData({title});
         if (options.apiUrl) {
             this.setData({"apiUrl": options.apiUrl})
         }
@@ -57,7 +62,6 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom() {
-        // TODO：节流
         this.loadMore()
     },
 
@@ -78,5 +82,20 @@ Page({
     },
     searchChangeHandle(e) {
         this.setData({searchText: e.detail.value})
+    },
+    favorites: function () {
+        let title = this.data.title;
+        let index = 0;
+        fetchStorage.array(app.config.favorite, title).then(res => {
+            if (res.length > 0) {
+                let dataJson = JSON.stringify(res[0]);
+                let pageDataJson = JSON.stringify(res);
+                let url = `/pages/gridDetail/gridDetail?title=${title}&data=${dataJson}&index=${index}&pageData=${pageDataJson}`;
+                wx.redirectTo({
+                    url
+                })
+            }
+        });
+
     }
 });

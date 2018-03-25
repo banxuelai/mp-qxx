@@ -1,71 +1,46 @@
 const fetch = require('../../utils/fetchQxx');
+const app = getApp();
+
+const login = require('../../utils/login');
 Page({
-    /**
-     * 页面的初始数据
-     */
     data: {
-        userInfo: {}
+        balance: 0,
+        freeze: 0,
+        score: 0,
+        score_sign_continuous: 0
     },
+    onLoad() {
 
-    /**
-     * 生命周期函数--监听页面加载
-     */
-    onLoad(options) {
-
+    },
+    onShow() {
         fetch("/account").then(value => {
             this.setData({userInfo: value.data});
         })
-
-
+    },
+    profile: function () {
+        wx.navigateTo({
+            url: '../settings/settings'
+        })
+    },
+    aboutUs: function () {
+        wx.showModal({
+            title: '关于我们',
+            content: '我们是新新的家人',
+            showCancel: false
+        })
     },
 
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady() {
 
-    },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow() {
-
-
-    },
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide() {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload() {
-
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh() {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom() {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage() {
-
+    relogin: function (e) {
+        wx.removeStorageSync(app.config.jhpsterHeader);
+        login(e.detail.formId).then(res => {
+            if (res.Authorization) {
+                wx.showModal({
+                    title: '登录成功',
+                    content: '登录成功',
+                    showCancel: false
+                })
+            }
+        });
     }
 });

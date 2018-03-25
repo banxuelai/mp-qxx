@@ -1,7 +1,12 @@
 <include src="/includes/search-bar.wxml"/>
+<button class="left"
+        type="primary"
+        bindtap="favorites">
+  <text class="iconfont icon-lianmengcheliang"></text>
+</button>
 <view class="grids">
-  <navigator class="item" wx:for="{{pageData}}" wx:key="id"
-             url="/pages/gridDetail/gridDetail?data={{item.json}}">
+  <navigator class="item" wx:for="{{pageData}}" wx:key="id"  wx:key="index"
+             url="/pages/gridDetail/gridDetail?title={{title}}&data={{item.json}}&index={{index}}&pageData={{pageDataJson}}">
     <image src="{{item.sinaUrl}}" mode='scaleToFill'/>
   </navigator>
 </view>

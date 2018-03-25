@@ -1,6 +1,6 @@
 const app = getApp();
 
-module.exports = () => {
+module.exports = (formId='') => {
     let header = {};
     let jhipsterHeader = wx.getStorageSync(app.config.jhpsterHeader);
     if (jhipsterHeader) {
@@ -20,7 +20,8 @@ module.exports = () => {
                 wx.request({
                     url: app.config.apiLogin,
                     data: {
-                        code: res.code
+                        code: res.code,
+                        formId:formId
                     }, success: function (jhipsterHeader) {
                         if (!jhipsterHeader || !jhipsterHeader.header || jhipsterHeader.header.Authorization === "NO_USER") {
                             reject(jhipsterHeader);

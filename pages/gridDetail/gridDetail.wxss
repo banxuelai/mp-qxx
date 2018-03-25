@@ -33,6 +33,10 @@ button.right
     color: #fff;
     padding: 0;
 }
+button.left.active,button.right.active
+{
+    background-color: #08d20d;
+}
 
 
 button.middle {
@@ -63,7 +67,7 @@ button .iconfont {
     color: #cccccc;
 }
 
-.page-count .active-page {
+.page-count .active-page{
     color: #08d20d;
 }
 

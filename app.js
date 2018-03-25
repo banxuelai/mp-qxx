@@ -4,7 +4,9 @@ App({
         apiBaseQxx: 'https://ectest.nipponpaint.com.cn/api',
         apiLogin: 'https://ectest.nipponpaint.com.cn/wechat/user/login',
         apiUserInfo: 'https://ectest.nipponpaint.com.cn/wechat/user/info',
-        jhpsterHeader: "jhpsterHeader"
+        jhpsterHeader: "jhpsterHeader",
+        profile:"profile",
+        favorite:"favorite"
     },
     message: {
         error: "错误,请重刷新重试,或者联系工作人员",
