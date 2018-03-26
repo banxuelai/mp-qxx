@@ -1,4 +1,4 @@
-const fetchQxx = require('../../utils/fetchQxx');
+const fetch = require('../../utils/fetch');
 const fetchStorage = require('../../utils/fetchStorage');
 const app = getApp();
 Page({
@@ -21,7 +21,7 @@ Page({
         const params = {page: pageIndex++, size: pageSize};
         if (searchText) params['name.contains'] = searchText;
 
-        return fetchQxx(this.data.apiUrl, params)
+        return fetch.loginAndFetch(this.data.apiUrl, params)
             .then(res => {
                 const totalCount = parseInt(res.header['X-Total-Count']);
                 const hasMore = this.data.pageIndex * this.data.pageSize < totalCount;
@@ -93,6 +93,12 @@ Page({
                 let url = `/pages/gridDetail/gridDetail?title=${title}&data=${dataJson}&index=${index}&pageData=${pageDataJson}`;
                 wx.redirectTo({
                     url
+                })
+            } else {
+                wx.showToast({
+                    title: '您还没有收藏',
+                    icon: 'success',
+                    duration: 2000
                 })
             }
         });

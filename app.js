@@ -1,12 +1,13 @@
+const apiBaseStr = 'https://ectest.nipponpaint.com.cn';
 App({
     config: {
-        apiBase: 'https://ectest.nipponpaint.com.cn/api',
-        apiBaseQxx: 'https://ectest.nipponpaint.com.cn/api',
-        apiLogin: 'https://ectest.nipponpaint.com.cn/wechat/user/login',
-        apiUserInfo: 'https://ectest.nipponpaint.com.cn/wechat/user/info',
+        apiBase: apiBaseStr,
+        apiBaseApi: apiBaseStr + '/api',
+        apiLogin: apiBaseStr + '/wechat/user/login',
+        apiUserInfo: apiBaseStr + '/wechat/user/info',
         jhpsterHeader: "jhpsterHeader",
-        profile:"profile",
-        favorite:"favorite"
+        profile: "profile",
+        favorite: "favorite"
     },
     message: {
         error: "错误,请重刷新重试,或者联系工作人员",
@@ -14,8 +15,8 @@ App({
         timeOut: "连接超时"
     }
     , onLaunch: function () {
-      console.log("onLaunch->removeStorageSync->jhpsterHeader");
-      wx.removeStorageSync(this.config.jhpsterHeader);
+        console.log("onLaunch->removeStorageSync->jhpsterHeader");
+        wx.removeStorageSync(this.config.jhpsterHeader);
 
     }
 });

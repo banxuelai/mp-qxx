@@ -1,4 +1,4 @@
-const fetch = require('../../utils/fetchQxx');
+const fetch = require('../../utils/fetch');
 const app = getApp();
 
 const login = require('../../utils/login');
@@ -13,7 +13,7 @@ Page({
 
     },
     onShow() {
-        fetch("/account").then(value => {
+        fetch.loginAndFetch("/account").then(value => {
             this.setData({userInfo: value.data});
         })
     },

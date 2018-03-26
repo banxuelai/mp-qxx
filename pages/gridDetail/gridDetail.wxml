@@ -7,19 +7,14 @@
 
             <audio src="{{src}}"
                    id="myAudio"></audio>
-            <view class="button-wrap">
-                <!-- <button class="left"
-                        type="primary"
-                        disabled="true">
-                    <text class="iconfont icon-lianmengcheliang"></text>
-                </button> -->
-                <button class="middle"
-                        type="primary"
-                        bindtap="audioPlay">
-                    <text class="iconfont icon-shengyin"></text>
-                </button>
 
-            </view>
+            <!-- <button class="left"
+                    type="primary"
+                    disabled="true">
+                <text class="iconfont icon-lianmengcheliang"></text>
+            </button> -->
+
+
             <view class="page-count">
                 <text class="active-page">{{index + 1}}</text>
                 /
@@ -29,15 +24,29 @@
             <view class="name">
                 {{item.name}}
             </view>
+            <view class="button-wrap">
+                <button class="left"
+                        type="primary"
+                        disabled="true">
+                    <text class="iconfont icon-weixin"></text>
+                </button>
+
+                <button class="middle"
+                        type="primary"
+                        bindtap="audioPlay">
+                    <text class="iconfont icon-shengyin"></text>
+                </button>
+                <button class="right {{isFavorite?'active':''}}"
+                        type="success"
+                        bindtap="addOrCancelFavorite">
+                    <text class="iconfont icon-lianmengcheliang"></text>
+                </button>
+            </view>
             <view class='desctription'
                   wx:if="{{item.desctription}}">
                 <text>{{item.desctription}}</text>
             </view>
-            <button class="right {{isFavorite?'active':''}}"
-                    type="success"
-                    bindtap="addOrCancelFavorite">
-                <text class="iconfont icon-weixin"></text>
-            </button>
+
         </swiper-item>
     </block>
 

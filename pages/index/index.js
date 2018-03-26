@@ -1,5 +1,4 @@
-const fetchQxx = require('../../utils/fetchQxx');
-const login = require('../../utils/login');
+const fetch = require('../../utils/fetch');
 const app = getApp();
 
 Page({
@@ -22,14 +21,14 @@ Page({
         if (options.login === 'REMOVE_LOGIN') {
             wx.removeStorageSync(app.config.jhpsterHeader)
         }
-        fetchQxx('/slides')
+        fetch.loginAndFetch('/slides')
             .then(res => {
                 if (res) {
                     this.setData({slides: res.data})
                 }
 
             }).then(() => {
-            return fetchQxx('/categories')
+            return fetch.loginAndFetch('/categories')
         })
             .then(res => {
                 if (res) this.setData({categories: res.data})

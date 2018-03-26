@@ -88,10 +88,10 @@ button .iconfont {
 .page-count:after
 {
     right: 250rpx;
-    border-color: transparent transparent transparent #cccccc;
+    border-color: transparent transparent transparent #08d20d;
 }
 
 .page-count:before {
     left: 250rpx;
-    border-color: transparent #cccccc transparent transparent ;
+    border-color: transparent #08d20d transparent transparent ;
 }

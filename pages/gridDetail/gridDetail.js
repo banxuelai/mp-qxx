@@ -46,6 +46,7 @@ Page({
         });
         that.setData({innerAudioContext: innerAudioContext});
 
+
     },
     onUnload: function () {
         if (this.data.innerAudioContext) {
