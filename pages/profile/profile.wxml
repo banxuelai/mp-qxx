@@ -1,36 +1,10 @@
-<view class="container">
-    <view class="userinfo">
-        <image wx:if="{{userInfo && userInfo.imageUrl}}" class="userinfo-avatar" src="{{userInfo.imageUrl}}"
-               background-size="cover"></image>
-        <text class="userinfo-nickname">{{userInfo.firstName}}</text>
-    </view>
-    <view style="height:20rpx;background: #eee;width:100%;"></view>
+<view class="avatar">
+  <image src="{{userInfo.imageUrl}}" bindtap="loginHandle"></image>
+</view>
 
-
-    <view style="height:20rpx;background: #eee;width:100%;"></view>
-
-
-    <view class="about" bindtap="profile">
-        个人资料
-    </view>
-
-    <view class="about" bindtap="question">
-        意见反馈
-    </view>
-
-    <view class="about" bindtap="aboutUs">
-        关于我们
-    </view>
-
-    <view style="height:20rpx;background: #eee;width:100%;"></view>
-    <view class="my-item"
-          style="border:none;padding:0rpx;margin:0rpx;background:none;border:none;height:auto;line-height:auto;">
-         <form bindsubmit="relogin" report-submit="true">
-        <button type="warn" formType="submit" bindtap="relogin">重新登录</button>
-          </form>
-    </view>
-
-    <view style="height:20rpx;background: #eee;width:100%;"></view>
-    <view class="version">Powered by Angrypanda </view>
-    <view style="height:20rpx;background: #eee;width:100%;"></view>
+<view class="cells">
+  <navigator class="item">个人资料</navigator>
+  <view class="divider"></view>
+  <view class="divider"></view>
+  <navigator url="/pages/settings/settings" class="item">设置</navigator>
 </view>

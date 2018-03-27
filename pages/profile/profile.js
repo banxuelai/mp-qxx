@@ -4,17 +4,50 @@ const app = getApp();
 const login = require('../../utils/login');
 Page({
     data: {
-        balance: 0,
-        freeze: 0,
-        score: 0,
-        score_sign_continuous: 0
+        version: '1.0',
+        userInfo: {}
     },
     onLoad() {
-
+        let version = app.config.version;
+        this.setData({version});
     },
     onShow() {
         fetch.loginAndFetch("/account").then(value => {
             this.setData({userInfo: value.data});
+            if (!value.data.hasUpdateInfo) {
+                console.log("未同步数据!");
+                this.updateUserInfo();
+            }
+        })
+    },
+    updateUserInfo: function () {
+        let that = this;
+        wx.getUserInfo({
+            success: function (userInfo) {
+                let jhipsterHeader = wx.getStorageSync(app.config.jhpsterHeader);
+                wx.request({
+                    url: app.config.apiUserInfo,
+                    data: {
+                        sessionKey: jhipsterHeader.header.WxSessionKey,
+                        signature: userInfo.signature,
+                        rawData: userInfo.rawData,
+                        encryptedData: userInfo.encryptedData,
+                        iv: userInfo.iv
+                    },
+                    success: function (res) {
+                        console.log("用户更新:" + jhipsterHeader);
+                        that.setData({userInfo: res.data});
+
+                    }, fail: function (data) {
+                        console.log(data);
+                    }
+                })
+
+            },
+            fail: function (error) {
+                console.log(error);
+
+            }
         })
     },
     profile: function () {
