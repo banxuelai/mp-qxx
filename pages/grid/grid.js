@@ -6,7 +6,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-        apiUrl: "",
+        apiUrl: app.config.apiObjectWord,
         title: "",
         pageData: [],
         pageDataJson: "[]",
@@ -17,8 +17,8 @@ Page({
     },
 
     loadMore() {
-        let {pageIndex, pageSize, searchText} = this.data;
-        const params = {page: pageIndex++, size: pageSize};
+        let {pageIndex, pageSize,groupId, searchText} = this.data;
+        const params = { page: pageIndex++, size: pageSize, 'groupId.equals': groupId};
         if (searchText) params['name.contains'] = searchText;
 
         return fetch.loginAndFetch(this.data.apiUrl, params)
@@ -42,11 +42,9 @@ Page({
      */
     onLoad(options) {
         let title = options.title;
+        let groupId = options.groupId;
         wx.setNavigationBarTitle({title: title});
-        this.setData({title});
-        if (options.apiUrl) {
-            this.setData({"apiUrl": options.apiUrl})
-        }
+        this.setData({ title, groupId});
         this.loadMore()
     },
 

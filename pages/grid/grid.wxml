@@ -2,7 +2,7 @@
 <view class="grids">
   <navigator class="item" wx:for="{{pageData}}" wx:key="id"  wx:key="index"
              url="/pages/gridDetail/gridDetail?title={{title}}&data={{item.json}}&index={{index}}&pageData={{pageDataJson}}">
-    <image src="{{item.sinaUrl}}" mode='scaleToFill'/>
+    <image src="{{item.imgUrl}}" mode='scaleToFill'/>
   </navigator>
 </view>
 

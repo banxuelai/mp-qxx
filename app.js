@@ -5,6 +5,7 @@ App({
         apiBaseApi: apiBaseStr + '/api',
         apiLogin: apiBaseStr + '/wechat/user/login',
         apiUserInfo: apiBaseStr + '/wechat/user/info',
+        apiObjectWord:'/object-words',
         jhpsterHeader: "jhpsterHeader",
         profile: "profile",
         favorite: "favorite",

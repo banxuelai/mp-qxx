@@ -28,7 +28,7 @@ Page({
                 }
 
             }).then(() => {
-            return fetch.loginAndFetch('/categories')
+            return fetch.loginAndFetch('/object-groups')
         })
             .then(res => {
                 if (res) this.setData({categories: res.data})

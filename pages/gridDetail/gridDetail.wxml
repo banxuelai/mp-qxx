@@ -2,7 +2,7 @@
     <block wx:for="{{pageData}}"
            wx:key="index">
         <swiper-item>
-            <image src="{{item.sinaUrl}}" bindtap="audioPlay"
+            <image src="{{item.imgUrl}}" bindtap="audioPlay"
                    mode='aspectFit'/>
 
             <audio src="{{src}}"

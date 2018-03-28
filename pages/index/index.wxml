@@ -8,8 +8,8 @@
     </swiper-item>
 </swiper>
 <view class="grids">
-    <navigator class="item" wx:for="{{categories}}" wx:key="id" url="{{item.link}}">
-        <image src="{{item.icon}}"/>
+    <navigator class="item" wx:for="{{categories}}" wx:key="id" url="/pages/grid/grid?groupId={{item.id}}&&title={{item.name}}">
+        <image src="{{item.imgUrl}}"/>
         <text>{{item.name}}</text>
     </navigator>
 </view>
