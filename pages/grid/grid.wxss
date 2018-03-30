@@ -23,7 +23,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 33.3333333333%;
+  width: 50%;
   height: 250rpx;
   border-right: 1rpx solid #eee;
   border-bottom: 1rpx solid #eee;

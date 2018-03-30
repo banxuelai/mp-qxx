@@ -29,7 +29,7 @@
                 <button class="right {{isFavorite?'active':''}}"
                         type="left"
                         bindtap="addOrCancelFavorite">
-                    <text class="iconfont icon-lianmengcheliang"></text>
+                    <text class="iconfont icon-star__easyico"></text>
                 </button>
 
                 <button class="middle"
