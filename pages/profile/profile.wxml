@@ -1,10 +1,18 @@
 <view class="avatar">
-  <image src="{{userInfo.imageUrl}}" bindtap="loginHandle"></image>
+  <view class="avatar-info">
+    <image src="{{userInfo.imageUrl}}" bindtap="loginHandle"></image>
+    <text class="name">{{userInfo.firstName}}</text>
+  </view>
 </view>
 
 <view class="cells">
-  <navigator class="item">个人资料</navigator>
-  <view class="divider"></view>
-  <view class="divider"></view>
+ 
   <navigator url="/pages/settings/settings" class="item">设置</navigator>
+  <navigator class="item">关于</navigator>
+
+</view>
+ <button open-type='contact' type='primary' >意见反馈</button>
+
+<view class="reward">
+  <image src="/assets/reward.png" bindtap='rewardMe'></image>
 </view>
