@@ -13,12 +13,13 @@ Page({
         pageIndex: 0,
         pageSize: 10,
         totalCount: 0,
+        maxSize: 40,
         hasMore: true
     },
 
     loadMore() {
-        let {pageIndex, pageSize,groupId, searchText} = this.data;
-        const params = { page: pageIndex++, size: pageSize, 'groupId.equals': groupId};
+        let {pageIndex, pageSize, groupId, searchText} = this.data;
+        const params = {page: pageIndex++, size: pageSize, 'groupId.equals': groupId, sort: 'rank,asc'};
         if (searchText) params['name.contains'] = searchText;
 
         return fetch.loginAndFetch(this.data.apiUrl, params)
@@ -29,10 +30,15 @@ Page({
                 if (hasMore) {
                     pageData = this.data.pageData.concat(res.data);
                 }
+                // if (pageData.length > this.data.maxSize) {
+                //     pageData = pageData.splice(pageData.length - this.data.maxSize)
+                // }
+                let ids = [];
                 for (let data of pageData) {
-                    data["json"] = JSON.stringify(data)
+                    ids.push(data.id);
+                    data["json"] = JSON.stringify(data);
                 }
-                let pageDataJson = JSON.stringify(pageData);
+                let pageDataJson = JSON.stringify(ids);
                 this.setData({pageData, totalCount, pageIndex, hasMore, pageDataJson})
             })
     },
@@ -44,7 +50,7 @@ Page({
         let title = options.title;
         let groupId = options.groupId;
         wx.setNavigationBarTitle({title: title});
-        this.setData({ title, groupId});
+        this.setData({title, groupId});
         this.loadMore()
     },
 

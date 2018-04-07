@@ -11,6 +11,7 @@
     "pages/messages/messages",
     "pages/messageDetail/messageDetail",
     "pages/profile/profile",
+    "pages/about/about",
     "pages/settings/settings"
   ],
   "window": {

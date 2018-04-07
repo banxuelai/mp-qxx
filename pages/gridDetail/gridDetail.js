@@ -1,6 +1,7 @@
 const favorite = require('../../utils/favorite');
 const app = getApp();
 const fetchStorage = require('../../utils/fetchStorage');
+const fetch = require('../../utils/fetch');
 
 
 Page({
@@ -22,29 +23,34 @@ Page({
         let title = options.title;
         this.setData({title});
         wx.setNavigationBarTitle({title: title});
-        let gridData = JSON.parse(options.data);
         let that = this;
         let pageData = JSON.parse(options.pageData);
-        let currentIndex = options.index;
-        let isFavorite = favorite.isFavorite(title, gridData);
-        that.setData({
-            gridData,
-            pageData,
-            currentIndex,
-            isFavorite
+        const params = {page: 0, size: 100, 'id.in': pageData.toString(), sort: 'rank,asc'};
+        fetch.loginAndFetch(app.config.apiObjectWord, params).then(res => {
+            let currentIndex = options.index;
+            pageData = res.data;
+            let gridData = pageData[currentIndex];
+            let isFavorite = favorite.isFavorite(title, gridData);
+            that.setData({
+                gridData,
+                pageData,
+                currentIndex,
+                isFavorite
+            });
+            const innerAudioContext = wx.createInnerAudioContext();
+            innerAudioContext.autoplay = fetchStorage.obj(app.config.profile, "autoPlay");
+            innerAudioContext.src = gridData.audioUrl;
+            // console.log(res.data.url);
+            innerAudioContext.onPlay(() => {
+                // console.log('开始播放')
+            });
+            innerAudioContext.onError((res) => {
+                // console.log(res.errMsg);
+                // console.log(res.errCode)
+            });
+            that.setData({innerAudioContext: innerAudioContext});
+
         });
-        const innerAudioContext = wx.createInnerAudioContext();
-        innerAudioContext.autoplay = fetchStorage.obj(app.config.profile, "autoPlay");
-        innerAudioContext.src = gridData.audioUrl;
-        // console.log(res.data.url);
-        innerAudioContext.onPlay(() => {
-            // console.log('开始播放')
-        });
-        innerAudioContext.onError((res) => {
-            // console.log(res.errMsg);
-            // console.log(res.errCode)
-        });
-        that.setData({innerAudioContext: innerAudioContext});
 
 
     },
