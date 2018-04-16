@@ -18,8 +18,8 @@ Page({
     },
 
     loadMore() {
-        let {pageIndex, pageSize, groupId, searchText} = this.data;
-        const params = {page: pageIndex++, size: pageSize, 'wordGroupId.equals': groupId, sort: 'rank,asc'};
+        let {pageIndex, pageSize, searchText} = this.data;
+        const params = {page: pageIndex++, size: pageSize, sort: 'rank,asc'};
         if (searchText) params['name.contains'] = searchText;
 
         return fetch.loginAndFetch(this.data.apiUrl, params)
@@ -47,11 +47,10 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
-        let title = options.title;
-        let groupId = options.groupId;
-        wx.setNavigationBarTitle({title: title});
-        this.setData({title, groupId});
-        this.loadMore()
+        let searchText = options.searchText;
+        let searchShowed = true;
+        this.setData({searchText, searchShowed});
+        this.loadMore();
     },
 
     /**

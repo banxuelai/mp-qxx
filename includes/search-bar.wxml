@@ -12,7 +12,7 @@
       <view class="weui-search-bar__text">搜索</view>
     </label>
   </view>
-  <view class="weui-search-bar__cancel-btn"  bindtap="favorites">收藏</view>
+  <view class="weui-search-bar__cancel-btn" hidden="{{!searchShowed}}" bindtap="hideSearchHandle">取消</view>
 </view>
 <!-- <view class="weui-cells searchbar-result" wx:if="{{searchText}}">
   <navigator url="" class="weui-cell" hover-class="weui-cell_active">

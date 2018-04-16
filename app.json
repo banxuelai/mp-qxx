@@ -3,6 +3,7 @@
     "pages/index/index",
     "pages/list/list",
     "pages/grid/grid",
+    "pages/searchGrid/searchGrid",
     "pages/gridDetail/gridDetail",
     "pages/localList/localList",
     "pages/localDetail/localDetail",

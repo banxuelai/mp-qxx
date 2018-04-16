@@ -18,28 +18,23 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
-        if (options.login === 'REMOVE_LOGIN') {
-            wx.removeStorageSync(app.config.jhpsterHeader)
-        }
-        fetch.loginAndFetch('/slides')
-            .then(res => {
-                if (res) {
-                    this.setData({slides: res.data})
-                }
+        let slides = [];
+        let obj = {};
+        obj['icon'] = 'http://wx4.sinaimg.cn/mw690/006anqYkgy1fp13mf4chtj30go0b5t9b.jpg';
+        slides.push(obj);
+        this.setData({slides});
+        fetch.loginAndFetch('/word-groups', {sort: 'rank,asc'}).then(res => {
+            if (res) this.setData({categories: res.data})
+        });
 
-            }).then(() => {
-            return fetch.loginAndFetch('/object-groups', {sort: 'rank,asc'})
-        })
-            .then(res => {
-                if (res) this.setData({categories: res.data})
-            })
+
     },
     loadMore() {
     },
     searchHandle() {
-        // console.log(this.data.searchText)
-        this.setData({pageData: [], pageIndex: 0, hasMore: true});
-        this.loadMore()
+        wx.navigateTo({
+            url: '/pages/searchGrid/searchGrid?searchText=' + this.data.searchText
+        })
     },
 
     showSearchHandle() {
