@@ -18,10 +18,11 @@ Page({
     },
 
     loadMore() {
-        let {pageIndex, pageSize, groupId, searchText} = this.data;
-        const params = {page: pageIndex++, size: pageSize, 'wordGroupId.equals': groupId, sort: 'rank,asc'};
+        let storageSync = wx.getStorageSync(app.config.favorite,) || {};
+        let res = storageSync["words"] || [];
+        let {pageIndex, pageSize, searchText} = this.data;
+        const params = {page: pageIndex++, size: pageSize, sort: 'rank,asc', 'id.in': res.toString()};
         if (searchText) params['name.contains'] = searchText;
-
         return fetch.fetchAvailable(this.data.apiUrl, params)
             .then(res => {
                 const totalCount = parseInt(res.header['X-Total-Count']);
@@ -41,17 +42,32 @@ Page({
                 let pageDataJson = JSON.stringify(ids);
                 this.setData({pageData, totalCount, pageIndex, hasMore, pageDataJson})
             })
+
+
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
-        let title = options.title;
-        let groupId = options.groupId;
-        wx.setNavigationBarTitle({title: title});
-        this.setData({title, groupId});
-        this.loadMore()
+        // wx.setNavigationBarTitle({title: "我的收藏"});
+    },
+
+    onShow() {
+        this.setData({pageData: [], pageIndex: 0, hasMore: true});
+        let storageSync = wx.getStorageSync(app.config.favorite,) || {};
+        let res = storageSync["words"] || [];
+        if (res.length === 0) {
+            wx.showToast({
+                title: '您还没有收藏',
+                icon: 'success',
+                duration: 2000
+            })
+        } else {
+            this.loadMore();
+        }
+
+
     },
 
     /**
@@ -92,12 +108,7 @@ Page({
         let index = 0;
         fetchStorage.array(app.config.favorite, title).then(res => {
             if (res.length > 0) {
-                let dataJson = JSON.stringify(res[0]);
-                let pageDataJson = JSON.stringify(res);
-                let url = `/pages/gridDetail/gridDetail?title=${title}&data=${dataJson}&index=${index}&pageData=${pageDataJson}`;
-                wx.redirectTo({
-                    url
-                })
+
             } else {
                 wx.showToast({
                     title: '您还没有收藏',

@@ -22,7 +22,7 @@ Page({
         const params = {page: pageIndex++, size: pageSize, sort: 'rank,asc'};
         if (searchText) params['name.contains'] = searchText;
 
-        return fetch.loginAndFetch(this.data.apiUrl, params)
+        return fetch.fetchAvailable(this.data.apiUrl, params)
             .then(res => {
                 const totalCount = parseInt(res.header['X-Total-Count']);
                 const hasMore = this.data.pageIndex * this.data.pageSize < totalCount;

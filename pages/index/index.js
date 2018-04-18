@@ -18,12 +18,18 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
-        let slides = [];
-        let obj = {};
-        obj['icon'] = 'http://wx4.sinaimg.cn/mw690/006anqYkgy1fp13mf4chtj30go0b5t9b.jpg';
-        slides.push(obj);
-        this.setData({slides});
-        fetch.loginAndFetch('/word-groups', {sort: 'rank,asc'}).then(res => {
+        fetch.fetchAvailable('/slides').then(res => {
+            if (res && res.data.length > 0) {
+                this.setData({slides: res.data})
+            } else {
+                let slides = [];
+                let obj = {};
+                obj['imgUrl'] = 'http://wx4.sinaimg.cn/mw690/006anqYkgy1fp13mf4chtj30go0b5t9b.jpg';
+                slides.push(obj);
+                this.setData({slides});
+            }
+        });
+        fetch.fetchAvailable('/word-groups', {sort: 'rank,asc'}).then(res => {
             if (res) this.setData({categories: res.data})
         });
 

@@ -20,6 +20,10 @@ module.exports.fetch = (url, data, method = 'GET', header = {}) => {
         })
     })
 };
+module.exports.fetchAvailable = (url, data = {}, method = 'GET', header = {}) => {
+    Object.assign(data, {'lifeStatus.equals': 'AVAILABLE'});
+    return module.exports.loginAndFetch(url, data, method, header);
+};
 module.exports.loginAndFetch = (url, data, method = 'GET', header = {}) => {
     wx.showLoading({title: 'Loading...'});
     return login().then(res => {

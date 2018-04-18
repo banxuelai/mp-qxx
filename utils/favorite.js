@@ -8,7 +8,7 @@ module.exports.addOrCancel = (key, value) => {
         let index = 0;
         if (data.length > 0) {
             for (let obj of data) {
-                if (obj === value.id) {
+                if (obj === value) {
                     hasValue = true;
                     break;
                 }
@@ -17,7 +17,7 @@ module.exports.addOrCancel = (key, value) => {
 
         }
         if (!hasValue) {
-            data.push(value.id);
+            data.push(value);
             wx.showToast({
                 title: '收藏成功',
                 icon: 'success',

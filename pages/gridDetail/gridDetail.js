@@ -26,11 +26,11 @@ Page({
         let that = this;
         let pageData = JSON.parse(options.pageData);
         const params = {page: 0, size: 100, 'id.in': pageData.toString(), sort: 'rank,asc'};
-        fetch.loginAndFetch(app.config.apiObjectWord, params).then(res => {
+        fetch.fetchAvailable(app.config.apiObjectWord, params).then(res => {
             let currentIndex = options.index;
             pageData = res.data;
             let gridData = pageData[currentIndex];
-            let isFavorite = favorite.isFavorite(title, gridData);
+            let isFavorite = favorite.isFavorite("words", gridData);
             that.setData({
                 gridData,
                 pageData,
@@ -86,7 +86,7 @@ Page({
         }
     },
     addOrCancelFavorite: function () {
-        favorite.addOrCancel(this.data.title, this.data.gridData).then(res => {
+        favorite.addOrCancel("words", this.data.gridData.id).then(res => {
             this.setData({isFavorite: res});
         });
     }
